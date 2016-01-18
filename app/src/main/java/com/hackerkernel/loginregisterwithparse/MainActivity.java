@@ -31,12 +31,20 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        assert getSupportActionBar() != null;
         getSupportActionBar().setTitle("Register");
 
         //Create a progressdialog
         pd = new ProgressDialog(this);
         pd.setMessage("Please wait");
         pd.setCancelable(true);
+
+        //Check user is logged in
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if (currentUser != null) {
+            //Send user to HomeActivity
+            goToHomeActivity();
+        }
 
         //instanciate views
         mFullname = (EditText) findViewById(R.id.regFullname);
@@ -86,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                     pd.dismiss(); //hide progressDialog
                     if(e == null){
                         //Hurray signup completed
-                        Toast.makeText(getApplication(), "Register", Toast.LENGTH_SHORT).show();
+                        goToHomeActivity();
                     }else{
                         //Signup didnt work some error
                         Toast.makeText(getApplication(), e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -96,6 +104,13 @@ public class MainActivity extends AppCompatActivity {
         }else{
             Toast.makeText(getApplication(), R.string.fill_in_all_the_fields, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void goToHomeActivity() {
+        Intent intent = new Intent(getApplication(),HomeActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
 

@@ -28,12 +28,12 @@
         <TableRow android:layout_marginBottom="10dp">
             <TextView
                 android:layout_height="wrap_content"
-                android:layout_weight="wrap_content"
+                android:layout_width="wrap_content"
                 android:text="@string/fullname"/>
 
             <TextView
                 android:layout_height="wrap_content"
-                android:layout_weight="wrap_content"
+                android:layout_width="wrap_content"
                 android:gravity="right"
                 android:text="Husain saify"
                 android:id="@+id/homeFullname"/>
@@ -42,12 +42,12 @@
         <TableRow android:layout_marginBottom="10dp">
             <TextView
                 android:layout_height="wrap_content"
-                android:layout_weight="wrap_content"
+                android:layout_width="wrap_content"
                 android:text="@string/emailaddress"/>
 
             <TextView
                 android:layout_height="wrap_content"
-                android:layout_weight="wrap_content"
+                android:layout_width="wrap_content"
                 android:gravity="right"
                 android:text="Husain saify"
                 android:id="@+id/homeEmail"/>
@@ -56,12 +56,12 @@
         <TableRow android:layout_marginBottom="10dp">
             <TextView
                 android:layout_height="wrap_content"
-                android:layout_weight="wrap_content"
+                android:layout_width="wrap_content"
                 android:text="@string/phonenumber"/>
 
             <TextView
                 android:layout_height="wrap_content"
-                android:layout_weight="wrap_content"
+                android:layout_width="wrap_content"
                 android:gravity="right"
                 android:text="Husain saify"
                 android:id="@+id/homePhone"/>
