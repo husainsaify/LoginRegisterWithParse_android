@@ -1,11 +1,18 @@
 package com.hackerkernel.loginregisterwithparse;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.parse.ParseException;
+import com.parse.ParseUser;
+import com.parse.SignUpCallback;
 
 public class MainActivity extends AppCompatActivity {
     private EditText mFullname;
@@ -14,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText mPassword;
     private Button mRegister;
     private TextView mGoToLogin;
+    public ProgressDialog pd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +30,12 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("LOGIN");
+        getSupportActionBar().setTitle("Register");
+
+        //Create a progressdialog
+        pd = new ProgressDialog(this);
+        pd.setMessage("Please wait");
+        pd.setCancelable(true);
 
         //instanciate views
         mFullname = (EditText) findViewById(R.id.regFullname);
@@ -31,5 +44,50 @@ public class MainActivity extends AppCompatActivity {
         mPassword = (EditText) findViewById(R.id.regPassword);
         mRegister = (Button) findViewById(R.id.register);
         mGoToLogin = (TextView) findViewById(R.id.goToLogin);
+
+        //When Register button is clicked
+        mRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Call Register Method
+                register();
+            }
+        });
     }
+
+    private void register() {
+        String fullname = mFullname.getText().toString().trim();
+        String email = mEmail.getText().toString().trim();
+        String phone = mPhone.getText().toString().trim();
+        String password = mPassword.getText().toString().trim();
+
+        //check fields are not empty
+        if(!fullname.isEmpty() && !email.isEmpty() && !phone.isEmpty() && !password.isEmpty()){
+            pd.show(); //show progressDialog
+            //Store user info in Parse.com
+            ParseUser user = new ParseUser();
+            user.setUsername(fullname);
+            user.setEmail(email);
+            user.put("phone", phone);
+            user.setPassword(password);
+
+            user.signUpInBackground(new SignUpCallback() {
+                @Override
+                public void done(ParseException e) {
+                    pd.dismiss(); //hide progressDialog
+                    if(e == null){
+                        //Hurray signup completed
+                        Toast.makeText(getApplication(), "Register", Toast.LENGTH_SHORT).show();
+                    }else{
+                        //Signup didnt work some error
+                        Toast.makeText(getApplication(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }else{
+            Toast.makeText(getApplication(), R.string.fill_in_all_the_fields, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
 }
