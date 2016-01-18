@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">LoginRegisterWithParse</string>
+    <string name="fullname">Full Name</string>
+    <string name="emailaddress">Email Address</string>
+    <string name="phonenumber">Phone Number</string>
+    <string name="dob">Date Of Birth</string>
+    <string name="password">Password</string>
+    <string name="register">Register</string>
+</resources>
