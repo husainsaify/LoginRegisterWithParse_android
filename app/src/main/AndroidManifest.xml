@@ -27,7 +27,8 @@
             android:name="com.parse.CLIENT_KEY"
             android:value="2rIkMWnCzlt2MS6llHhaVtHmAoaUv1Sb0rBVIgQ9" />
         <!-- /parse -->
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".HomeActivity"></activity>
     </application>
 
 </manifest>
